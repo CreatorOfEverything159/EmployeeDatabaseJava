@@ -15,8 +15,12 @@ public class Database {
     }
 
     public void addEmployee(String login, String password, String name) {
-        if (getEmployeeByLogin(login).isEmpty()) {
+        try {
             database.add(new Employee(name, login, password));
+        } catch (Exception e) {
+            System.out.println("Пользователь с таким именем уже существует!");
+        } finally {
+            System.out.println("Пользователь успешно добавлен!");
         }
     }
 
