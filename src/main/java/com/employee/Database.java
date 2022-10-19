@@ -1,34 +1,30 @@
 package com.employee;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Database {
 
     public static List<Employee> database = new ArrayList<>();
 
-    public @Nullable Employee getEmployeeByLogin(String login) {
-        return database
-                .stream()
-                .filter(employee -> employee.getLogin().equals(login))
-                .findFirst()
-                .orElse(null);
+    public Optional<Employee> getEmployeeByLogin(String login) {
+        return database.stream()
+                .filter(e -> e.getLogin().equals(login))
+                .findFirst();
     }
 
     public void addEmployee(String login, String password, String name) {
-        if (getEmployeeByLogin(login) == null) {
+        if (getEmployeeByLogin(login).isEmpty()) {
             database.add(new Employee(name, login, password));
         }
     }
 
-
     public void updateEmployeeByLogin(String login, String newLogin, String newPassword, String newName) {
-        Employee employee = getEmployeeByLogin(login);
+        Optional<Employee> employee = getEmployeeByLogin(login);
 
-        if (employee != null && getEmployeeByLogin(newLogin) == null) {
-            employee
+        if (employee.isPresent() && getEmployeeByLogin(newLogin).isEmpty()) {
+            employee.get()
                     .setName(newName)
                     .setLogin(newLogin)
                     .setPassword(newPassword);
@@ -36,7 +32,7 @@ public class Database {
     }
 
     public void deleteEmployeeByLogin(String login) {
-        database.removeIf(employee -> employee.getLogin().equals(login));
+        database.removeIf(e -> e.getLogin().equals(login));
     }
 
     public void show() {
