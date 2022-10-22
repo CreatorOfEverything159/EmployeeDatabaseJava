@@ -1,12 +1,12 @@
 package com.employee.Entity;
 
-public class WorkPlace {
+public class Workplace {
 
     private String type;
 
     private int number;
 
-    public WorkPlace(String type, int number) {
+    public Workplace(String type, int number) {
         this.type = type;
         this.number = number;
     }
@@ -15,16 +15,20 @@ public class WorkPlace {
         return type;
     }
 
-    public void setType(String type) {
+    public Workplace setType(String type) {
         this.type = type;
+
+        return this;
     }
 
     public int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public Workplace setNumber(int number) {
         this.number = number;
+
+        return this;
     }
 
 }
