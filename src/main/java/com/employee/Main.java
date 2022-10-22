@@ -76,6 +76,12 @@ public class Main {
             System.err.println(e.getMessage());
         }
 
+        try {
+            database.reserve("login1", 1, new Date(21, Calendar.NOVEMBER, 20, 0, 0), new Date(21, Calendar.NOVEMBER, 20, 9, 0));
+        } catch (AlreadyExistsException e) {
+            System.err.println(e.getMessage());
+        }
+
         database.showReservations();
 
     }

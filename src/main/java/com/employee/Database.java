@@ -96,11 +96,7 @@ public class Database {
     }
 
     private boolean isTimeIntersect(Date start1, Date end1, Date start2, Date end2) {
-        if ((start1.before(start2) || end1.after(start2))
-                || (start1.after(start2) || start1.before(end2))) {
-            return true;
-        }
-        return false;
+        return (start1.before(start2) && end1.after(start2)) || (start1.after(start2) && start1.before(end2));
     }
 
     private List<Booking> getBookingsByWorkplace(Workplace workplace) {
